@@ -1,5 +1,6 @@
 var express = require('express'),
-	http = require('http');
+	http = require('http'),
+	wechat = require('./controller/wechat')
 
 var app = express();
 
@@ -19,10 +20,7 @@ app.configure('development', function(){
 	app.use(express.errorHandler());
 })
 
-app.get('/', function(req, res) {
-	console.log(req);
-    res.send('Hello World');
-});
+app.get('/', wechat.index);
 
 http.createServer(app).listen(app.get('port'), function(){
 	console.log('listening on port ' + app.get('port'));
