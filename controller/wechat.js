@@ -13,7 +13,6 @@ function checkSignature(ts, nonce, sign){
     var sha1 = crypto.createHash('sha1');
 
     sha1.update(res);
-    console.log(res);
     if(sha1.digest('hex') == sign){
         return true;
     }
