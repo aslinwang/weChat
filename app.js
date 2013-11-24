@@ -1,6 +1,6 @@
 var express = require('express'),
 	http = require('http'),
-	wechat = require('./controller/wechat')
+	wechat = require('./controller/wechat');
 
 var app = express();
 
