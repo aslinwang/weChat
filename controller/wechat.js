@@ -32,3 +32,7 @@ exports.index = function(req, res){
 	    res.send('ok');
 	}
 }
+
+exports.createMenu = function(menus){
+	console.log(menus);
+}

@@ -1,16 +1,15 @@
 /**
  *Wechat Tools 
  */
-var cmd = require('commander');
+var cmd = require('commander'),
+	wechat = require('./controller/wechat');
 
 cmd.version('0.0.1')
-   .option('-c, --cmenu', 'Create Menu')
-   .option('-h, --help', 'help')
+   .option('-c, --cmenu [value]', 'Create Menu,option with comma split')
+   .option('-d, --dmenu', 'Delete Menu')
    .parse(process.argv);
 
-console.log('-c:create menu');
-console.log('-h:seek for help');
-
-if(cmd.cmenu){
-    console.log(cmd.cmenu);
+if(cmd.cmenu){//create menu
+	var menus = ['books', 'tools'];
+	wechat.createMenu(menus);
 }
