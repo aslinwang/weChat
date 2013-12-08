@@ -3,7 +3,9 @@
 var CONFIG = require('../config');
 
 var url = require('url'),
-    crypto = require('crypto');
+    crypto = require('crypto'),
+	qs = require('querystring'),
+	https = require('https');
 
 function checkSignature(ts, nonce, sign){
     var token = CONFIG.TOKEN,
@@ -21,6 +23,27 @@ function checkSignature(ts, nonce, sign){
     }
 }
 
+function getAccessToken(callback){
+	var options = {
+		hostname:'api.weixin.qq.com',
+		port:443,
+		path:'/cgi-bin/token?grant_type=client_credential&appid='+CONFIG.APPID+'&secret='+CONFIG.APPSECRET,
+		method:'GET'	
+	};
+
+	var req = https.request(options, function(res){
+		res.on('data', function(data){
+			data = JSON.parse(data);
+			callback(data);
+		})
+	});
+	req.end();
+
+	req.on('error', function(e){
+		console.log(e);
+	});
+}
+
 exports.index = function(req, res){
 	var _url = url.parse(req.url, true);
 	var _params = _url.query;
@@ -34,5 +57,7 @@ exports.index = function(req, res){
 }
 
 exports.createMenu = function(menus){
-	console.log(menus);
+	getAccessToken(function(data){
+		console.log(data);
+	});
 }

@@ -10,6 +10,6 @@ cmd.version('0.0.1')
    .parse(process.argv);
 
 if(cmd.cmenu){//create menu
-	var menus = ['书籍', '工具'];
+	var menus = ['书籍', '工具', '音乐'];
 	wechat.createMenu(menus);
 }
